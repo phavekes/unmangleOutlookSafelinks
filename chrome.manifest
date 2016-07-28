@@ -1,0 +1,2 @@
+content unmangleOutlookSafelinks    chrome/content/
+overlay chrome://messenger/content/messenger.xul chrome://unmangleOutlookSafelinks/content/unmangle.xul
