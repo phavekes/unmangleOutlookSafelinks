@@ -7,7 +7,4 @@ ZIPFILE=${NAME}-${VERSION}.xpi
 
 rm -f ${ZIPFILE}
 
-zip -r $ZIPFILE . \
-    -x "*.git*" \
-    -x $ZIPFILE \
-    -x makexpi.sh
+(cd src && zip -r - .) > ${ZIPFILE}
