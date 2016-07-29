@@ -13,9 +13,16 @@ var unmangleOutlookSafelinks = {
         }
     },
 
-    fixLink: function (a) {
-        if (a.hostname.match('safelinks.protection.outlook.com') == false) {
+    unmangleLink: function (a) {
+        if (a.hostname.endsWith('safelinks.protection.outlook.com') == false) {
             return;
+        }
+
+        var doInner = false;
+
+        // This is a pretty lame test
+        if (a.innerHTML.includes('safelinks.protection.outlook.com')) {
+            doInner = true;
         }
 
         var terms = a.search.replace(/^\?/, '').split('&');
@@ -24,6 +31,9 @@ var unmangleOutlookSafelinks = {
             var s = terms[i].split('=');
             if (s[0] == 'url') {
                 a.href = decodeURIComponent(s[1]);
+                if (doInner) {
+                    a.innerHTML = a.href;
+                }
                 return;
             }
         }
@@ -35,7 +45,7 @@ var unmangleOutlookSafelinks = {
         doc.defaultView.addEventListener("unload", function (e) { unmangleOutlookSafelinks.onPageUnload(e); }, true);
         var links = doc.getElementsByTagName("a");
         for (var i=0; i < links.length; i++) {
-            unmangleOutlookSafelinks.fixLink(links[i]);
+            unmangleOutlookSafelinks.unmangleLink(links[i]);
         }
     },
 
