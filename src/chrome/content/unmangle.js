@@ -1,11 +1,21 @@
 // unmangle.js
 
+// "window" is the class for creating top-level windows. You get one when you
+// start up the client but you can make more in various ways (like opening a
+// message in a new window)
+
 window.addEventListener("load", function load(event) {
         window.removeEventListener("load", load, false);
         unmangleOutlookSafelinks.init();
     }, false);
 
+
 var unmangleOutlookSafelinks = {
+
+    // the "messagepane" element is the HTML display of a message. Even for
+    // text/plain messages you get a HTML display, because that's how tbird
+    // renders things.
+
     init: function () {
         var messagepane = document.getElementById("messagepane");
         if (messagepane) {
