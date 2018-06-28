@@ -1,6 +1,6 @@
-# unmangleOutlookSafelinks
+# unmangleOutlookSafelinks [Install here](https://addons.mozilla.org/en-US/firefox/addon/unmangle-outlook-safelinks/)
 
-Thunderbird plugin to unmangle Outlook Protection Safelinks
+Thunderbird plugin to unmangle Outlook Protection Safelinks 
 
 Based upon https://github.com/mbattersby/unmangleOutlookSafelinks
 Original version by mib@post.com
