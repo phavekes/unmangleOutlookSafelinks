@@ -44,10 +44,10 @@ var unmangleOutlookSafelinks = {
             var s = terms[i].split('=');
             if (s[0] == 'url') {
                 a.href = decodeURIComponent(s[1]);
+		a.title="Outlook Unmangled from: "+orgUrl;
 		
                 if (doInner) {
-                    a.textContent = a.href;
-		    a.title="Outlook Unmangled from: "+orgUrl;
+                    a.textContent = a.href;		    
                 }
                 return;
             }
