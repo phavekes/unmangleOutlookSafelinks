@@ -16,7 +16,7 @@ Thunderbird plugin to unmangle Outlook Protection Safelinks
 Based upon https://github.com/mbattersby/unmangleOutlookSafelinks
 Original version by mib@post.com
 
-Users of Office365 who have Advanced Thread Proytection enabled wil change
+Users of Office365 who have Advanced Thread Protection enabled wil change
 all url's in emails to redirect them to an Microsoft filter before opening.
 This will leak information to microsoft and makes it impossible to see if
 the original url was safe to open.
