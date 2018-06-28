@@ -7,7 +7,7 @@ Original version by mib@post.com
 
 Users of Office365 who have Advanced Thread Proytection enabled wil change
 all url's in emails to redirect them to an Microsoft filter before opening.
-Thit will leak information to microsoft and makes it impossible to see if
+This will leak information to microsoft and makes it impossible to see if
 the original url was safe to open.
 
 E.g. a link to http://phishingsite.fake.ru/you/are/hacked.php wil show as
