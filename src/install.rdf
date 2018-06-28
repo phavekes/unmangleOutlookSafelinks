@@ -6,7 +6,7 @@
   <Description about="urn:mozilla:install-manifest">
     <em:id>unmangleOutlookSafelinks@havekes.eu</em:id>
     <em:name>Unmangle Outlook Safelinks</em:name>
-    <em:version>1.4</em:version>
+    <em:version>1.42</em:version>
     <em:type>2</em:type>
     <em:developer>mib@post.com</em:developer>
     <em:creator>Peter Havekes - peter@havekes.eu</em:creator>
