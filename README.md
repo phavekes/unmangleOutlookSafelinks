@@ -15,6 +15,12 @@ https://emea01.safelinks.protection.outlook.com/?url=http%3A%2F%2Fphishingsite.f
 
 and will not be recogniosed by a user as dangerous.
 
+This also inherently introduces the ability to do:
+* Man-in-the-middle
+* Tracking of user clicks
+* Possibly a lot of (unnecessary) redirects
+*Lack of readability.
+
 This plugin wil change the url back to the original value.
 
 
