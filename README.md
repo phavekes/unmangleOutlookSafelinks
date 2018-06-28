@@ -19,7 +19,7 @@ This also inherently introduces the ability to do:
 * Man-in-the-middle
 * Tracking of user clicks
 * Possibly a lot of (unnecessary) redirects
-*Lack of readability.
+* Lack of readability.
 
 This plugin wil change the url back to the original value.
 
