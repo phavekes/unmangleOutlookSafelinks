@@ -27,6 +27,9 @@ var unmangleOutlookSafelinks = {
         if (a.hostname.endsWith('safelinks.protection.outlook.com') == false) {
             return;
         }
+	
+	//remember original url
+	var orgUrl=a.href;
 
         var doInner = false;
 
@@ -41,9 +44,10 @@ var unmangleOutlookSafelinks = {
             var s = terms[i].split('=');
             if (s[0] == 'url') {
                 a.href = decodeURIComponent(s[1]);
+		
                 if (doInner) {
                     a.innerHTML = a.href;
-		    a.title="Outlook Unmangled"
+		    a.title="Outlook Unmangled from: "+orgUrl;
                 }
                 return;
             }
