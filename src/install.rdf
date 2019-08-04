@@ -8,8 +8,10 @@
     <em:name>Unmangle Outlook Safelinks</em:name>
     <em:version>1.42</em:version>
     <em:type>2</em:type>
+    <em:bootstrap>true</em:bootstrap>
     <em:developer>mib@post.com</em:developer>
     <em:creator>Peter Havekes - peter@havekes.eu</em:creator>
+    <em:contributor>Jan Kiszka - jan.kiszka@web.de</em:contributor>
     <em:description>
 Thunderbird plugin to unmangle Outlook Protection Safelinks
 
