@@ -37,7 +37,6 @@ This plugin will change the URL back to the original value.
         <em:maxVersion>65.0</em:maxVersion>
       </Description>
     </em:targetApplication>
-    <em:aboutURL>https://github.com/phavekes/unmangleOutlookSafelinks</em:aboutURL>
     <em:homepageURL>https://github.com/phavekes/unmangleOutlookSafelinks</em:homepageURL>
     <em:iconURL>chrome://unmangleOutlookSafelinks/content/icon.png</em:iconURL>
     <em:icon64URL>chrome://unmangleOutlookSafelinks/content/icon64.png</em:icon64URL>
