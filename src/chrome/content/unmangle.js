@@ -27,9 +27,9 @@ var unmangleOutlookSafelinks = {
         if (a.hostname.endsWith('safelinks.protection.outlook.com') == false) {
             return;
         }
-	
-	//remember original url
-	var orgUrl=a.href;
+
+        //remember original url
+        var orgUrl=a.href;
 
         var doInner = false;
 
@@ -44,15 +44,14 @@ var unmangleOutlookSafelinks = {
             var s = terms[i].split('=');
             if (s[0] == 'url') {
                 a.href = decodeURIComponent(s[1]);
-		a.title="Outlook Unmangled from: "+orgUrl;
-		
+                a.title="Outlook Unmangled from: "+orgUrl;
+
                 if (doInner) {
-                    a.textContent = a.href;		    
+                    a.textContent = a.href;
                 }
                 return;
             }
         }
-        
     },
 
     onPageLoad: function (e) {
