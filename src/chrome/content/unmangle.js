@@ -56,15 +56,9 @@ var unmangleOutlookSafelinks = {
 
     onPageLoad: function (e) {
         var doc = e.originalTarget;
-        doc.defaultView.addEventListener("unload", function (e) { unmangleOutlookSafelinks.onPageUnload(e); }, true);
         var links = doc.getElementsByTagName("a");
         for (var i=0; i < links.length; i++) {
             unmangleOutlookSafelinks.unmangleLink(links[i]);
         }
     },
-
-    onPageUnload: function (e) {
-        var doc = e.originalTarget;
-        // undo? LOL!
-    }
 };
