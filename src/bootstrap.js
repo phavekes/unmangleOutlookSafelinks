@@ -3,8 +3,7 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 var WindowListener = {
 
     onOpenWindow: function(xulWindow) {
-        var window = xulWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                              .getInterface(Components.interfaces.nsIDOMWindow);
+        var window = xulWindow.getInterface(Components.interfaces.nsIDOMWindow);
 
         window.addEventListener("load", function listener() {
                 window.removeEventListener("load", listener);
@@ -19,7 +18,7 @@ var WindowListener = {
 function forEachOpenWindow(todo) {
     var windows = Services.wm.getEnumerator("");
     while (windows.hasMoreElements()) {
-        todo(windows.getNext().QueryInterface(Components.interfaces.nsIDOMWindow));
+        todo(windows.getNext());
     }
 }
 
