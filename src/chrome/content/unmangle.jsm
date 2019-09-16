@@ -88,7 +88,8 @@ var unmangleOutlookSafelinks = {
     onComposerLoad: function (e) {
         var windows = Services.wm.getEnumerator("");
         if (windows.hasMoreElements()) {
-            var window = windows.getNext();
+            var window = windows.getNext().QueryInterface(
+                Components.interfaces.nsIDOMWindow);
             window.setTimeout(unmangleOutlookSafelinks.delayedInit, 1, e);
         }
     },
