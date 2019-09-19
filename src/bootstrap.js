@@ -2,14 +2,18 @@ Components.utils.import("resource://gre/modules/Services.jsm");
 
 var WindowListener = {
 
-    onOpenWindow: function(xulWindow) {
-        var window = xulWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
-                              .getInterface(Components.interfaces.nsIDOMWindow);
+    async initAsync(window) {
+	if (window.document.readyState != "complete") {
+	    // Make sure the window load has completed.
+	    await new Promise(resolve => {
+		window.addEventListener("load", resolve, { once: true });
+	    });
+	}
+	unmangleOutlookSafelinks.init(window);
+    },
 
-        window.addEventListener("load", function listener() {
-                window.removeEventListener("load", listener);
-                unmangleOutlookSafelinks.init(window);
-            });
+    onOpenWindow: function(xulWindow) {
+	this.initAsync(xulWindow.docShell.domWindow);
     },
 
     onCloseWindow: function(xulWindow) { },
@@ -19,14 +23,14 @@ var WindowListener = {
 function forEachOpenWindow(todo) {
     var windows = Services.wm.getEnumerator("");
     while (windows.hasMoreElements()) {
-        todo(windows.getNext().QueryInterface(Components.interfaces.nsIDOMWindow));
+        todo(windows.getNext());
     }
 }
 
 function startup(data, reason) {
     Components.utils.import("chrome://unmangleOutlookSafelinks/content/unmangle.jsm");
 
-    forEachOpenWindow(unmangleOutlookSafelinks.init);
+    forEachOpenWindow(WindowListener.initAsync);
     Services.wm.addListener(WindowListener);
 }
 
