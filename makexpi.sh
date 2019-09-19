@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NAME=unmangleOutlookSafelinks
-VERSION=1.51
+VERSION=2.01
 rm -Rf */*~
 
 ZIPFILE=${NAME}-${VERSION}.xpi
