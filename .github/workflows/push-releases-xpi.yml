@@ -24,7 +24,7 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         mv /tmp/${NAME}-${VERSION}.xpi addon/
-        echo "\n* [v${VERSION}](https://github.com/${OWNER}/unmangleOutlookSafelinks/raw/releases/${NAME}-${VERSION}.xpi)\n" >> README.md
+        echo -ne "\n* [${VERSION}](https://github.com/${OWNER}/unmangleOutlookSafelinks/raw/releases/addon/${NAME}-${VERSION}.xpi)\n" >> README.md
         git add README.md addon/${NAME}-${VERSION}.xpi
         git commit -m "Add ${VERSION} artifact by github actions"
     - name: Push changes
