@@ -90,7 +90,6 @@ var unmangleOutlookSafelinks = {
             let v3_token_pattern = new RegExp('\\*(\\*.)?', 'g');
             let length_codes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
             var url = a.href.match(v3_pattern);
-console.log(url[2].replace(/_/g, '/').replace(/-/g, '+') + '==');
             var encbytes = atob(url[2].replace(/_/g, '/').replace(/-/g, '+'));
             var encbytes_off = 0;
 
