@@ -60,28 +60,20 @@ var unmangleOutlookSafelinks = {
         }
     },
 
-    unmangleProofpointLink: function (a) {
+    decodeProofpointUri: function (a) {
         let detect_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/(v[0-9])/');
-        var proofpoint = a.href.match(detect_pattern);
+        var proofpoint = a.match(detect_pattern);
         if (!proofpoint)
-            return;
-
-        //remember original url
-        var orgUrl=a.href;
-
-        var doInner = false;
-        if (a.innerHTML.match(detect_pattern)) {
-            doInner = true;
-        }
+            return a;
 
         var v = proofpoint[1];
-        var outurl = orgUrl;
+        var outurl = a;
         if (v == 'v1') {
             let v1_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v1/url\\?u=(.*)&k=.*');
-            outurl = decodeURIComponent(a.href.match(v1_pattern)[1]);
+            outurl = decodeURIComponent(a.match(v1_pattern)[1]);
         } else if (v == 'v2') {
             let v2_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v2/url\\?u=(.*)&[dc]=.*');
-            var url = a.href.match(v2_pattern)[1];
+            var url = a.match(v2_pattern)[1];
             url = url.replace(/-/g, '%');
             url = url.replace(/_/g, '/');
             outurl = decodeURIComponent(url);
@@ -89,7 +81,7 @@ var unmangleOutlookSafelinks = {
             let v3_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v3/__(.+)__;([^\!]*).*');
             let v3_token_pattern = new RegExp('\\*(\\*.)?', 'g');
             let length_codes = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
-            var url = a.href.match(v3_pattern);
+            var url = a.match(v3_pattern);
             var encbytes = atob(url[2].replace(/_/g, '/').replace(/-/g, '+'));
             var encbytes_off = 0;
 
@@ -102,6 +94,20 @@ var unmangleOutlookSafelinks = {
                 return out;
             }
             outurl = url[1].replace(v3_token_pattern, insert_encbytes);
+        }
+
+        return outurl;
+    },
+
+    unmangleProofpointLink: function (a) {
+        //remember original url
+        var orgUrl = a.href;
+        var outurl = unmangleOutlookSafelinks.decodeProofpointUri(a.href);
+
+        // This is a pretty lame test
+        var doInner = false;
+        if (a.innerHTML.includes('https://urldefense')) {
+            doInner = true;
         }
 
         if (outurl != orgUrl) {
@@ -143,6 +149,9 @@ var unmangleOutlookSafelinks = {
         text.textContent =
             text.textContent.replace(/https:\/\/[^\.]+\.safelinks\.protection\.outlook\.com\/\?url=([^&]*)&[^>\s]*/g,
                                      unmangleOutlookSafelinks.decodeURI);
+        text.textContent =
+            text.textContent.replace(new RegExp('https://urldefense(?:\.proofpoint)?\.com/(v[0-9])/[^ ]+','g'),
+                                     unmangleOutlookSafelinks.decodeProofpointUri);
     },
 
     onComposerLoad: function (e) {
