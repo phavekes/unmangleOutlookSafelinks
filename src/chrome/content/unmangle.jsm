@@ -69,10 +69,10 @@ var unmangleOutlookSafelinks = {
         var v = proofpoint[1];
         var outurl = a;
         if (v == 'v1') {
-            let v1_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v1/url\\?u=(.*)&k=.*');
+            let v1_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v1/url\\?u=([^&]*)&k=.*');
             outurl = decodeURIComponent(a.match(v1_pattern)[1]);
         } else if (v == 'v2') {
-            let v2_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v2/url\\?u=(.*)&[dc]=.*');
+            let v2_pattern = new RegExp('https://urldefense(?:\.proofpoint)?\.com/v2/url\\?u=([^&]*)&[dc]=.*');
             var url = a.match(v2_pattern)[1];
             url = url.replace(/-/g, '%');
             url = url.replace(/_/g, '/');
