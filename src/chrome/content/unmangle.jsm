@@ -134,6 +134,9 @@ var unmangleOutlookSafelinks = {
         var links = doc.getElementsByTagName("a");
         for (var i=0; i < links.length; i++) {
             unmangleOutlookSafelinks.unmangleLink(links[i]);
+            // Certain deranged e-mail systems use *both*. Undo compounded
+            // mangled links by doing this twice.
+            unmangleOutlookSafelinks.unmangleLink(links[i]);
         }
     },
 
