@@ -26,7 +26,7 @@ function unmangleLink(a) {
     var s = terms[i].split('=');
     if (s[0] == 'url') {
       a.href = decodeURIComponent(s[1]);
-      a.title = "Microsoft Safelink was: " + orgUrl;
+      a.title = "Unmangled Microsoft Safelink";
 
       console.log("Rewrote "+orgUrl+" to "+a.href);
 
@@ -51,4 +51,4 @@ console.log("Start unmangle links")
 //First, unmangle the links
 unmangleAllLinks()
 //Then unmangle any texts :
-//document.body.innerHTML = unmangleContent(document.body.innerHTML);
+document.body.innerHTML = unmangleContent(document.body.innerHTML);

@@ -21,6 +21,7 @@
   },
   "permissions": [
     "messagesModify",
-    "messagesRead"
+    "messagesRead",
+    "compose"
   ]
 }
