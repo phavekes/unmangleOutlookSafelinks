@@ -8,26 +8,26 @@ function unmangleAllLinks() {
 
 //fix a link
 function unmangleLink(a) {
+  //check if this link if mangled by microsoft ATP
   if (a.hostname.endsWith('safelinks.protection.outlook.com') == false) {
     return;
   }
   //remember original url
   var orgUrl = a.href;
-
   var doInner = false;
 
-  // This is a pretty lame test
+  // Check if the text of the link also includes a safelink
   if (a.innerHTML.includes('safelinks.protection.outlook.com')) {
     doInner = true;
   }
 
   var terms = a.search.replace(/^\?/, '').split('&');
-
   for (var i = 0; i < terms.length; i++) {
     var s = terms[i].split('=');
     if (s[0] == 'url') {
       a.href = decodeURIComponent(s[1]);
-      a.title = "Outlook Unmangled from: " + orgUrl;
+      a.title = "Microsoft Safelink was: " + orgUrl;
+
       console.log("Rewrote "+orgUrl+" to "+a.href);
 
       if (doInner) {
