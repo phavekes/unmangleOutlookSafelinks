@@ -1,15 +1,7 @@
-//loop over all html links
-function unmangleAllLinks() {
-  var links = document.body.getElementsByTagName("a");
-  for (var i = 0; i < links.length; i++) {
-    unmangleLink(links[i]);
-  }
-}
-
 //fix a link
 function unmangleLink(a) {
   //check if this link if mangled by microsoft ATP
-  if (a.hostname.endsWith('safelinks.protection.outlook.com') == false) {
+  if (a.hostname.endsWith("safelinks.protection.outlook.com") === false) {
     return;
   }
   //remember original url
@@ -17,14 +9,15 @@ function unmangleLink(a) {
   var doInner = false;
 
   // Check if the text of the link also includes a safelink
-  if (a.innerHTML.includes('safelinks.protection.outlook.com')) {
+  if (a.innerHTML.includes("safelinks.protection.outlook.com")) {
     doInner = true;
   }
 
-  var terms = a.search.replace(/^\?/, '').split('&');
-  for (var i = 0; i < terms.length; i++) {
-    var s = terms[i].split('=');
-    if (s[0] == 'url') {
+  var terms = a.search.replace(/^\?/, "").split("&");
+  var i;
+  for (i = 0; i < terms.length; i++) {
+    var s = terms[i].split("=");
+    if (s[0] === "url") {
       a.href = decodeURIComponent(s[1]);
       a.title = "Unmangled Microsoft Safelink";
 
@@ -47,8 +40,21 @@ function unmangleContent(text) {
   return text;
 }
 
-console.log("Start unmangle links")
+//loop over all html links
+function unmangleAllLinks() {
+  var links = document.body.getElementsByTagName("a");
+  var i;
+  for (i = 0; i < links.length; i++) {
+    unmangleLink(links[i]);
+  }
+}
+
 //First, unmangle the links
-unmangleAllLinks()
+console.log("Start unmangle links");
+unmangleAllLinks();
 //Then unmangle any texts :
+console.log("Start unmangle innerHTML");
+console.log(document.body);
 document.body.innerHTML = unmangleContent(document.body.innerHTML);
+console.log("Start unmangle outerHTML");
+document.body.outerHTML = unmangleContent(document.body.outerHTML);
