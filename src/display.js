@@ -13,21 +13,15 @@ function unmangleLink(a) {
     doInner = true;
   }
 
-  var terms = a.search.replace(/^\?/, "").split("&");
-  var i;
-  for (i = 0; i < terms.length; i++) {
-    var s = terms[i].split("=");
-    if (s[0] === "url") {
-      a.href = decodeURIComponent(s[1]);
+  var realURL = (new URLSearchParams(a.search)).get("url")
+  if(realURL){
+      a.href = realURL;
       a.title = "Unmangled Microsoft Safelink";
-
       console.log("Rewrote "+orgUrl+" to "+a.href);
 
       if (doInner) {
         a.textContent = a.href;
       }
-      return;
-    }
   }
 }
 
