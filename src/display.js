@@ -35,9 +35,24 @@ function decodeURI(match, p1, offset, string) {
   return decodeURIComponent(p1);
 }
 
+
 function unmangleContent(text) {
+  const senderIdRegex = /.*https:\/\/aka\.ms\/LearnAboutSenderIdentification.*(?:\n|<br\s*\/?>)?/gi;
+  text = text.replace(senderIdRegex, "");
   text = text.replace(/https:\/\/[^\.]+\.safelinks\.protection\.outlook\.com\/\?url=([^&]*)&[^>\s]*/g, decodeURI);
   return text;
+}
+
+function removeSenderIdentificationTable() {
+  const links = document.querySelectorAll('a[href*="aka.ms/LearnAboutSenderIdentification"]');
+  
+  links.forEach(link => {
+    const table = link.closest('table');
+    if (table) {
+      console.log("Removing Microsoft Sender Identification table.");
+      table.remove();
+    }
+  });
 }
 
 //loop over all html links
@@ -49,9 +64,12 @@ function unmangleAllLinks() {
   }
 }
 
-//First, unmangle the links
+console.log("Start removing Microsoft Safety Tables");
+removeSenderIdentificationTable();
+
 console.log("Start unmangle links");
 unmangleAllLinks();
+
 //Then unmangle any texts :
 console.log("Start unmangle innerHTML");
 console.log(document.body);
