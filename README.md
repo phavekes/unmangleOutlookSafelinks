@@ -29,3 +29,8 @@ Version 2.* is compatible with Thunderbird 68+
 
 Version 3.* is compatible with Thunderbird 78+
 
+
+## "You don't often get email from"
+
+This "security" feature wil also mangle your email content. Starting version 3.1, 
+this will also be removed from your emails.
