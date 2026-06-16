@@ -37,7 +37,8 @@ function decodeURI(match, p1, offset, string) {
 
 
 function unmangleContent(text) {
-  const senderIdRegex = /.*https:\/\/aka\.ms\/LearnAboutSenderIdentification.*(?:\n|<br\s*\/?>)?/gi;
+  // anchored to avoid bad performance
+  const senderIdRegex = /^.*https:\/\/aka\.ms\/LearnAboutSenderIdentification.*(?:\n|<br\s*\/?>)?/gmi;
   text = text.replace(senderIdRegex, "");
   text = text.replace(/https:\/\/[^\.]+\.safelinks\.protection\.outlook\.com\/\?url=([^&]*)&[^>\s]*/g, decodeURI);
   return text;
