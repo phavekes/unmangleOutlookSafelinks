@@ -76,8 +76,11 @@ function unmangleWrappedPlainText(html) {
 
 function unmangleContent(text) {
   text = unmangleWrappedPlainText(text);
-  // anchored to avoid bad performance
-  const senderIdRegex = /^.*https:\/\/aka\.ms\/LearnAboutSenderIdentification.*(?:\n|<br\s*\/?>)?/gmi;
+  // This runs on rendered HTML, where the first line of a plain-text mail shares
+  // a line with the opening <div><pre> tags, so match only the bracketed banner
+  // (and any quote prefix) rather than the whole line. Excluding brackets from
+  // the character classes keeps this linear on long lines.
+  const senderIdRegex = /(?:&gt;[ \t]*){0,8}\[[^\[\]\n]*https:\/\/aka\.ms\/LearnAboutSenderIdentification[^\[\]\n]*\][ \t]*(?:\n|<br\s*\/?>)?/gi;
   text = text.replace(senderIdRegex, "");
   text = text.replace(/https:\/\/[^\.]+\.safelinks\.protection\.outlook\.com\/\?url=([^&]*)&[^>\s]*/g, decodeURI);
   return text;
